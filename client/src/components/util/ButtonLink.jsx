@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom'
 
 const ButtonLink = ({ children, to, ...rest }) => {
 	return (
-		<Button {...rest}>
-			<Link to={to}>
+		<Link to={to}>
+			<Button {...rest}>
 				{children}
-			</Link>
-		</Button>
+			</Button>
+		</Link>
 	)
 }
 
