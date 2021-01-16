@@ -1,12 +1,15 @@
 import React from 'react'
 
-import { Link } from 'react-router-dom'
+import ButtonLink from '../util/ButtonLink'
+import FormContainer from '../util/FormContainer'
 
 const Landing = () => {
 	return (
-		<Link to='/signup'>
-			Sign up
-		</Link>
+		<FormContainer>
+		<ButtonLink to='/signup' size='lg' w='full' colorScheme='blue'>
+			Create an account
+		</ButtonLink>
+		</FormContainer>
 	)
 }
 
