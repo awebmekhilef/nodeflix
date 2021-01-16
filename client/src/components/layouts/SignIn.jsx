@@ -2,12 +2,12 @@ import React from 'react'
 
 import { Heading } from '@chakra-ui/react'
 
-const App = () => {
+const SignIn = () => {
 	return (
 		<Heading>
-			Nodeflix
+			Sign in
 		</Heading>
 	)
 }
 
-export default App
+export default SignIn
