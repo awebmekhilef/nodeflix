@@ -2,16 +2,18 @@ import React from 'react'
 
 import { Formik, Form, Field } from 'formik'
 import { FormControl, Input, FormLabel } from '@chakra-ui/react'
+import { useHistory } from 'react-router-dom'
 
 import FormContainer from '../util/FormContainer'
 import FormButton from '../util/FormButton'
 
 const SignIn = () => {
-	const onSubmit = (values, { setSubmitting }) => {
+	const history = useHistory()
+
+	const onSubmit = (values) => {
 		setTimeout(() => {
-			setSubmitting(false)
-			console.log(values)
-		}, 2000);
+			history.push('/')
+		}, 2000)
 	}
 
 	return (
@@ -32,7 +34,7 @@ const SignIn = () => {
 							<Field as={Input} name='password' type='password' />
 						</FormControl>
 
-						<FormButton disabled={values.email.trim() == '' ||
+						<FormButton disabled={values.email.trim() === '' ||
 							values.password.trim() === ''}
 							loading={isSubmitting} />
 					</Form>
