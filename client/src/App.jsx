@@ -1,13 +1,14 @@
 import React from 'react'
 
-import Header from './components/sections/Header'
 import Landing from './components/layouts/Landing'
-import SignIn from './components/layouts/SignIn'
+import Header from './components/sections/Header'
 import SignUp from './components/layouts/SignUp'
+import LogIn from './components/layouts/LogIn'
+import Home from './components/layouts/Home'
 
-import {
-	BrowserRouter, Switch, Route
-} from 'react-router-dom'
+import { BrowserRouter, Switch } from 'react-router-dom'
+import AuthRoute from './components/util/AuthRoute'
+import ProtectedRoute from './components/util/ProtectedRoute'
 
 function App() {
 	return (
@@ -15,10 +16,21 @@ function App() {
 			<Header />
 
 			<Switch>
-				<Route exact path='/' component={Landing} />
-				<Route path='/signin' component={SignIn} />
-				<Route path='/signup' component={SignUp} />
-				<SignIn />
+				<AuthRoute exact path='/'>
+					<Landing />
+				</AuthRoute>
+
+				<ProtectedRoute path='/home'>
+					<Home />
+				</ProtectedRoute>
+
+				<AuthRoute path='/login'>
+					<LogIn />
+				</AuthRoute>
+
+				<AuthRoute path='/signup'>
+					<SignUp />
+				</AuthRoute>
 			</Switch>
 		</BrowserRouter>
 	)

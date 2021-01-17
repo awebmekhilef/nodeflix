@@ -1,6 +1,6 @@
 import React from 'react'
 
-import FormContainer from '../util/FormContainer'
+import FormContainer from '../sections/FormContainer'
 
 const Home = () => {
 	return (

@@ -2,17 +2,17 @@ import React from 'react'
 
 import { Formik, Form, Field } from 'formik'
 import { FormControl, Input, FormLabel } from '@chakra-ui/react'
-import { useHistory } from 'react-router-dom'
+import { useAuth } from '../../contexts/authContext'
 
-import FormContainer from '../util/FormContainer'
+import FormContainer from '../sections/FormContainer'
 import FormButton from '../util/FormButton'
 
-const SignIn = () => {
-	const history = useHistory()
+const LogIn = () => {
+	const [, setLoggedIn] = useAuth()
 
 	const onSubmit = (values) => {
 		setTimeout(() => {
-			history.push('/')
+			setLoggedIn(true)
 		}, 2000)
 	}
 
@@ -44,4 +44,4 @@ const SignIn = () => {
 	)
 }
 
-export default SignIn
+export default LogIn
