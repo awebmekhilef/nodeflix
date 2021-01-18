@@ -8,6 +8,7 @@ export const useAuth = () => useContext(AuthContext)
 
 export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null)
+	const [loading, setLoading] = useState(true) // When unsure of auth state dont show anything
 
 	useEffect(() => {
 		// Check if the user has a session on the server
@@ -16,6 +17,9 @@ export const AuthProvider = ({ children }) => {
 				const res = await axios.get('/auth/user')
 				setUser(res.data.user)
 			} catch (err) { }
+			finally {
+				setLoading(false)
+			}
 		}
 
 		getUser()
@@ -43,7 +47,7 @@ export const AuthProvider = ({ children }) => {
 	}
 
 	return (
-		<AuthContext.Provider value={{ user, signUp, logIn, logOut }}>
+		<AuthContext.Provider value={{ user, loading, signUp, logIn, logOut }}>
 			{children}
 		</AuthContext.Provider>
 	)
