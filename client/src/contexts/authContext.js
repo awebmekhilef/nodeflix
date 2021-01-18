@@ -13,30 +13,30 @@ export const AuthProvider = ({ children }) => {
 		// Check if the user has a session on the server
 		const getUser = async () => {
 			try {
-				const res = await axios.get('/user')
-				setUser(res.data)
+				const res = await axios.get('/auth/user')
+				setUser(res.data.user)
 			} catch (err) { }
 		}
 
 		getUser()
 	}, [])
 
-	const signUp = async (email, password) => {
-		return await axios.post('/signup', { email, password })
+	const signUp = (email, password) => {
+		return axios.post('/auth/signup', { email, password })
 			.then((res) => {
-				setUser(res.data)
+				setUser(res.data.user)
 			})
 	}
 
 	const logIn = (email, password) => {
-		return axios.post('/login', { email, password })
+		return axios.post('/auth/login', { email, password })
 			.then((res) => {
-				setUser(res.data)
+				setUser(res.data.user)
 			})
 	}
 
-	const logOut = async () => {
-		return axios.post('/logout')
+	const logOut = () => {
+		return axios.post('/auth/logout')
 			.then(() => {
 				setUser(false)
 			})

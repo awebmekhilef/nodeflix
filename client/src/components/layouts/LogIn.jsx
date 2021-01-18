@@ -20,7 +20,7 @@ const LogIn = () => {
 	}
 
 	return (
-		<FormContainer title='Sign In'>
+		<FormContainer title='Log In'>
 			<Formik
 				initialValues={{ email: 'test@test.com', password: 'password' }}
 				onSubmit={handleLogIn}
