@@ -8,19 +8,21 @@ import FormContainer from '../sections/FormContainer'
 import FormButton from '../util/FormButton'
 
 const SignUp = () => {
-	const [, setLoggedIn] = useAuth()
+	const { signUp } = useAuth()
 
-	const onSubmit = (values) => {
-		setTimeout(() => {
-			setLoggedIn(true)
-		}, 2000)
+	const handleSignUp = async ({ email, password }, { setSubmitting }) => {
+		try {
+			await signUp(email, password)
+		} catch (err) {
+			console.log('Error signing up')
+			setSubmitting(false)
+		}
 	}
-
 	return (
 		<FormContainer title='Create an account'>
 			<Formik
 				initialValues={{ email: 'test@test.com', password: 'password' }}
-				onSubmit={onSubmit}
+				onSubmit={handleSignUp}
 			>
 				{({ isSubmitting, values }) => (
 					<Form>

@@ -13,9 +13,13 @@ const app = express()
 // --------------- SESSION ---------------
 app.use(session({
 	secret: process.env.SESSION_SECRET,
-	saveUninitialized: true,
-	resave: true
+	saveUninitialized: false,
+	resave: false
 }))
+
+// --------------- BODY PARSER ---------------
+app.use(express.json({ limit: '5mb' }))
+app.use(express.urlencoded({ extended: false, limit: '50mb' }))
 
 // --------------- PASSPORT ---------------
 passport.use(new LocalStrategy({
@@ -44,14 +48,21 @@ passport.deserializeUser(async (id, done) => {
 	try {
 		const user = await User.findById(id)
 
-		if(!user)
+		if (!user)
 			return done(new Error('User not found'))
-		
+
 		done(null, user)
 	} catch (err) {
 		done(err)
 	}
 })
+
+const checkAuth = (req, res, next) => {
+	if (req.isAuthenticated())
+		next()
+	else
+		res.status(401).end()
+}
 
 app.use(passport.initialize())
 app.use(passport.session())
@@ -67,10 +78,6 @@ const db = mongoose.connection
 db.on('open', () => console.log('Connected to database'))
 db.on('error', () => console.error('Error connecting to database'))
 
-// --------------- BODY PARSER ---------------
-app.use(express.json({ limit: '5mb' }))
-app.use(express.urlencoded({ extended: false, limit: '50mb' }))
-
 // --------------- ROUTES ---------------
 app.post('/signup', async (req, res) => {
 	const user = new User({
@@ -81,6 +88,7 @@ app.post('/signup', async (req, res) => {
 	try {
 		await user.save()
 
+		req.logIn(user, console.log)
 		res.status(201).json(user)
 	} catch (err) {
 		res.status(400).json({
@@ -96,6 +104,10 @@ app.post('/login', passport.authenticate('local'), (req, res) => {
 app.post('/logout', (req, res) => {
 	req.logOut()
 	res.end()
+})
+
+app.get('/user', checkAuth, (req, res) => {
+	res.json(req.user)
 })
 
 app.listen(5000)

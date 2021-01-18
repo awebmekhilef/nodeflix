@@ -5,12 +5,12 @@ import { useAuth } from '../../contexts/authContext'
 
 // Redirects to landing page if not logged in
 const AuthRoute = ({ children, ...rest }) => {
-	const [loggedIn] = useAuth()
+	const { user } = useAuth()
 
 	return (
 		<Route {...rest}
 			render={() =>
-				loggedIn ? (
+				user ? (
 					children
 				) : (
 						<Redirect

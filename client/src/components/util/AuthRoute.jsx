@@ -5,12 +5,12 @@ import { useAuth } from '../../contexts/authContext'
 
 // Redirects to home page if already logged in
 const AuthRoute = ({ children, ...rest }) => {
-	const [loggedIn] = useAuth()
+	const { user }= useAuth()
 
 	return (
 		<Route {...rest}
 			render={() =>
-				loggedIn ? (
+				user ? (
 					<Redirect
 						to='/home'
 					/>
