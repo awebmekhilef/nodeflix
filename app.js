@@ -25,14 +25,14 @@ app.use(express.urlencoded({ extended: false, limit: '50mb' }))
 passport.use(new LocalStrategy({
 	usernameField: 'email'
 }, (email, password, done) => {
-	User.findOne({ email }, function (err, user) {
+	User.findOne({ email }, async function (err, user) {
 		if (err) return done(err)
 
 		if (!user) {
 			return done(null, false, { message: 'User not found.' })
 		}
 
-		if (user.password !== password) {
+		if (!await user.comparePassword(password)) {
 			return done(null, false, { message: 'Incorrect password.' })
 		}
 
