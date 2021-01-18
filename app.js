@@ -34,6 +34,6 @@ db.on('open', () => console.log('Connected to database'))
 db.on('error', () => console.error('Error connecting to database'))
 
 // --------------- ROUTES ---------------
-app.use('/auth', require('./routes/auth'))
+app.use('/auth', require('./routes/auth.route'))
 
 app.listen(config.port)
