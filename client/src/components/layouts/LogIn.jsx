@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Formik, Form, Field } from 'formik'
 import { FormControl, Input, FormLabel } from '@chakra-ui/react'
@@ -6,15 +6,18 @@ import { useAuth } from '../../contexts/authContext'
 
 import FormContainer from '../sections/FormContainer'
 import FormButton from '../util/FormButton'
+import FormError from '../util/FormError'
 
 const LogIn = () => {
 	const { logIn } = useAuth()
+
+	const [error, setError] = useState('')
 
 	const handleLogIn = async ({ email, password }, { setSubmitting }) => {
 		try {
 			await logIn(email, password)
 		} catch (err) {
-			console.log('Error logging in')
+			setError('Incorrent email or password.')
 			setSubmitting(false)
 		}
 	}
@@ -36,6 +39,8 @@ const LogIn = () => {
 							<FormLabel>Password:</FormLabel>
 							<Field as={Input} name='password' type='password' />
 						</FormControl>
+
+						{ error && <FormError error={error} />}
 
 						<FormButton disabled={values.email.trim() === '' ||
 							values.password.trim() === ''}

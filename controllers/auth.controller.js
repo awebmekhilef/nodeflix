@@ -12,7 +12,7 @@ const signUp = async (req, res) => {
 		req.logIn(user, console.error)
 		res.status(201).json({ user })
 	} catch (err) {
-		res.sendStatus(400)
+		res.sendStatus(400, { err: 'Email already in use.' })
 	}
 }
 
