@@ -2,7 +2,7 @@ const router = require('express').Router()
 const passport = require('passport')
 
 const authController = require('../controllers/auth.controller')
-const { checkAuth } = require('../controllers/middleware')
+const { checkAuth } = require('../middleware/auth.middleware')
 
 router.post('/signup', authController.signUp)
 
