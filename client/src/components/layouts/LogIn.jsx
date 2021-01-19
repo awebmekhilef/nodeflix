@@ -25,26 +25,24 @@ const LogIn = () => {
 	return (
 		<FormContainer title='Log In'>
 			<Formik
-				initialValues={{ email: 'test@test.com', password: 'password' }}
+				initialValues={{ email: 'john@doe.com', password: 'password' }}
 				onSubmit={handleLogIn}
 			>
-				{({ isSubmitting, values }) => (
+				{({ isSubmitting }) => (
 					<Form>
-						<FormControl mt={5}>
-							<FormLabel>Email address:</FormLabel>
+						<FormControl mt={5} isRequired>
+							<FormLabel>Email address</FormLabel>
 							<Field as={Input} name='email' type='email' />
 						</FormControl>
 
-						<FormControl mt={5}>
-							<FormLabel>Password:</FormLabel>
+						<FormControl mt={5} isRequired>
+							<FormLabel>Password</FormLabel>
 							<Field as={Input} name='password' type='password' />
 						</FormControl>
 
-						{ error && <FormError error={error} />}
+						{error && <FormError error={error} />}
 
-						<FormButton disabled={values.email.trim() === '' ||
-							values.password.trim() === ''}
-							loading={isSubmitting} />
+						<FormButton loading={isSubmitting} />
 					</Form>
 				)}
 			</Formik>

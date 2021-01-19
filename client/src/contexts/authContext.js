@@ -25,8 +25,8 @@ export const AuthProvider = ({ children }) => {
 		getUser()
 	}, [])
 
-	const signUp = (email, password) => {
-		return axios.post('/auth/signup', { email, password })
+	const signUp = (email, password, firstName, lastName) => {
+		return axios.post('/auth/signup', { email, password, firstName, lastName })
 			.then((res) => {
 				setUser(res.data.user)
 			})

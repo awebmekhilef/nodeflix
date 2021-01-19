@@ -8,7 +8,7 @@ const Home = () => {
 	const { user } = useAuth()
 
 	return (
-		<FormContainer title={`Welcome ${user.email}`} />
+		<FormContainer title={`Welcome, ${user.firstName}`} />
 	)
 }
 

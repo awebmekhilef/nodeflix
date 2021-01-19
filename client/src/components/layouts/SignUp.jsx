@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Formik, Form, Field } from 'formik'
 import {
 	FormControl, Input, FormLabel,
-	FormErrorMessage
+	FormErrorMessage, SimpleGrid
 } from '@chakra-ui/react'
 import { useAuth } from '../../contexts/authContext'
 import * as Yup from 'yup'
@@ -17,6 +17,13 @@ const validationSchema = Yup.object({
 		.string()
 		.email('Invalid email address')
 		.required('Email is required'),
+	firstName: Yup
+		.string()
+		.min(2, 'First name must be in between 2 and 15 characters')
+		.max(15, 'First name must be in between 2 and 15 characters')
+		.required('First name is required'),
+	lastName: Yup
+		.string(),
 	password: Yup
 		.string()
 		.min(6, 'Password must be a minimum of 6 characters')
@@ -29,9 +36,10 @@ const SignUp = () => {
 	// Error returned by server
 	const [apiError, setApiError] = useState('')
 
-	const handleSignUp = async ({ email, password }, { setSubmitting }) => {
+	const handleSignUp = async ({ email, password, firstName, lastName },
+		{ setSubmitting }) => {
 		try {
-			await signUp(email, password)
+			await signUp(email, password, firstName, lastName)
 		} catch (err) {
 			setApiError('Email already in use.')
 			setSubmitting(false)
@@ -41,32 +49,44 @@ const SignUp = () => {
 	return (
 		<FormContainer title='Create an account'>
 			<Formik
-				initialValues={{ email: '', password: '' }}
+				initialValues={{
+					firstName: 'John', lastName: '',
+					email: 'john@doe.com', password: 'password'
+				}}
 				onSubmit={handleSignUp}
 				validationSchema={validationSchema}
 			>
-				{({ isSubmitting, values, errors, touched }) => (
+				{({ isSubmitting, errors, touched }) => (
 					<Form>
-						<FormControl mt={5} isInvalid={errors.email && touched.email}>
-							<FormLabel>Email address:</FormLabel>
+						<SimpleGrid columns={[1, 2]} spacingX={5}>
+							<FormControl mt={5} isInvalid={errors.firstName && touched.firstName} isRequired>
+								<FormLabel>First name</FormLabel>
+								<Field as={Input} name='firstName' type='text' />
+								<FormErrorMessage>{errors.firstName}</FormErrorMessage>
+							</FormControl>
+
+							<FormControl mt={5} isInvalid={errors.lastName && touched.lastName}>
+								<FormLabel>Last name</FormLabel>
+								<Field as={Input} name='lastName' type='text' />
+								<FormErrorMessage>{errors.lastName}</FormErrorMessage>
+							</FormControl>
+						</SimpleGrid>
+
+						<FormControl mt={5} isInvalid={errors.email && touched.email} isRequired>
+							<FormLabel>Email address</FormLabel>
 							<Field as={Input} name='email' type='email' />
 							<FormErrorMessage>{errors.email}</FormErrorMessage>
 						</FormControl>
 
-						<FormControl mt={5} isInvalid={errors.password && touched.password}>
-							<FormLabel>Password:</FormLabel>
+						<FormControl mt={5} isInvalid={errors.password && touched.password} isRequired>
+							<FormLabel>Password</FormLabel>
 							<Field as={Input} name='password' type='password' />
 							<FormErrorMessage>{errors.password}</FormErrorMessage>
 						</FormControl>
 
-						{ apiError && <FormError error={apiError} />}
+						{apiError && <FormError error={apiError} />}
 
-						<FormButton
-							disabled={
-								errors.email ||
-								values.email.trim() === '' ||
-								values.password.length < 6}
-							loading={isSubmitting} />
+						<FormButton loading={isSubmitting} />
 					</Form>
 				)}
 			</Formik>
