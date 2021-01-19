@@ -1,48 +1,71 @@
 import React, { useState } from 'react'
 
 import { Formik, Form, Field } from 'formik'
-import { FormControl, Input, FormLabel } from '@chakra-ui/react'
+import {
+	FormControl, Input, FormLabel,
+	FormErrorMessage
+} from '@chakra-ui/react'
 import { useAuth } from '../../contexts/authContext'
+import * as Yup from 'yup'
 
 import FormContainer from '../sections/FormContainer'
 import FormButton from '../util/FormButton'
 import FormError from '../util/FormError'
 
+const validationSchema = Yup.object({
+	email: Yup
+		.string()
+		.email('Invalid email address')
+		.required('Email is required'),
+	password: Yup
+		.string()
+		.min(6, 'Password must be a minimum of 6 characters')
+		.required('Password is required')
+})
+
 const SignUp = () => {
 	const { signUp } = useAuth()
 
-	const [error, setError] = useState('')
+	// Error returned by server
+	const [apiError, setApiError] = useState('')
 
 	const handleSignUp = async ({ email, password }, { setSubmitting }) => {
 		try {
 			await signUp(email, password)
 		} catch (err) {
-			setError('Email already in use.')
+			setApiError('Email already in use.')
 			setSubmitting(false)
 		}
 	}
+
 	return (
 		<FormContainer title='Create an account'>
 			<Formik
-				initialValues={{ email: 'test@test.com', password: 'password' }}
+				initialValues={{ email: '', password: '' }}
 				onSubmit={handleSignUp}
+				validationSchema={validationSchema}
 			>
-				{({ isSubmitting, values }) => (
+				{({ isSubmitting, values, errors, touched }) => (
 					<Form>
-						<FormControl mt={5}>
+						<FormControl mt={5} isInvalid={errors.email && touched.email}>
 							<FormLabel>Email address:</FormLabel>
 							<Field as={Input} name='email' type='email' />
+							<FormErrorMessage>{errors.email}</FormErrorMessage>
 						</FormControl>
 
-						<FormControl mt={5}>
+						<FormControl mt={5} isInvalid={errors.password && touched.password}>
 							<FormLabel>Password:</FormLabel>
 							<Field as={Input} name='password' type='password' />
+							<FormErrorMessage>{errors.password}</FormErrorMessage>
 						</FormControl>
 
-						{ error && <FormError error={error} />}
+						{ apiError && <FormError error={apiError} />}
 
-						<FormButton disabled={values.email.trim() === '' ||
-							values.password.trim() === ''}
+						<FormButton
+							disabled={
+								errors.email ||
+								values.email.trim() === '' ||
+								values.password.length < 6}
 							loading={isSubmitting} />
 					</Form>
 				)}
