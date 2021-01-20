@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "client": "yarn --cwd client start",
-    "server": "nodemon app.ts",
+    "server": "nodemon app.js",
     "dev": "concurrently \"yarn server\" \"yarn client\""
   },
   "dependencies": {
