@@ -2,11 +2,12 @@ import React from 'react'
 
 import { Box, Center, Heading, Text } from '@chakra-ui/react'
 import ButtonLink from '../components/util/ButtonLink'
+import bg from '../assets/movie_posters.jpg'
 
 const Landing = () => {
 	return (
 		<Center
-			bgGradient="linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 35%, rgba(0,0,0,0.2) 65%, rgba(0,0,0,0.85) 100%), url('/movie_posters.jpg')"
+			bgGradient={`linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 35%, rgba(0,0,0,0.2) 65%, rgba(0,0,0,0.85) 100%), url(${bg})`}
 			bgSize='cover'
 			h='100vh' w='100%'
 			pos='absolute'
