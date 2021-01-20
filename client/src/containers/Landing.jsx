@@ -7,7 +7,7 @@ import bg from '../assets/movie_posters.jpg'
 const Landing = () => {
 	return (
 		<Center
-			bgGradient={`linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 35%, rgba(0,0,0,0.2) 65%, rgba(0,0,0,0.85) 100%), url(${bg})`}
+			bgGradient={`linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 35%, rgba(0,0,0,0.3) 65%, rgba(0,0,0,0.85) 100%), url(${bg})`}
 			bgSize='cover'
 			h='100vh' w='100%'
 			pos='absolute'
@@ -21,14 +21,14 @@ const Landing = () => {
 				<Text mt={5} textAlign='center' fontSize='2xl'>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, explicabo.
 				</Text>
-				<ButtonLink
-					to='/signup'
-					colorScheme='blue'
-					size='lg'
-					mt={5}
-					w='full'
-				>
-					Get Started!
+					<ButtonLink
+						to='/signup'
+						colorScheme='blue'
+						size='lg'
+						mt={5}
+						w='full'
+					>
+						Get Started!
 				</ButtonLink>
 			</Box>
 		</Center>
