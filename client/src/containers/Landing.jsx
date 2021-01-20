@@ -1,7 +1,7 @@
 import React from 'react'
 
-import ButtonLink from '../util/ButtonLink'
-import FormContainer from '../sections/FormContainer'
+import ButtonLink from '../components/util/ButtonLink'
+import FormContainer from '../components/Forms/FormContainer'
 
 const Landing = () => {
 	return (

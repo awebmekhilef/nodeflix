@@ -1,10 +1,10 @@
 import React from 'react'
 
-import Landing from './components/layouts/Landing'
-import Header from './components/sections/Header'
-import SignUp from './components/layouts/SignUp'
-import LogIn from './components/layouts/LogIn'
-import Home from './components/layouts/Home'
+import Header from './components/Header/Header'
+import Landing from './containers/Landing'
+import SignUp from './containers/SignUp'
+import LogIn from './containers/LogIn'
+import Home from './containers/Home'
 
 import { BrowserRouter, Switch } from 'react-router-dom'
 import { Spinner, Center } from '@chakra-ui/react'

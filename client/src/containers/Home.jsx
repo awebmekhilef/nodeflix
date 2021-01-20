@@ -1,8 +1,8 @@
 import React from 'react'
 
-import FormContainer from '../sections/FormContainer'
+import FormContainer from '../components/Forms/FormContainer'
 
-import { useAuth } from '../../contexts/authContext'
+import { useAuth } from '../contexts/authContext'
 
 const Home = () => {
 	const { user } = useAuth()
