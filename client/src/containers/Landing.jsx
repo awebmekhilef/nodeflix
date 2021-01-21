@@ -7,7 +7,7 @@ import bg from '../assets/movie_posters.jpg'
 const Landing = () => {
 	return (
 		<Center
-			bgGradient={`linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 35%, rgba(0,0,0,0.3) 65%, rgba(0,0,0,0.85) 100%), url(${bg})`}
+			bgGradient={`linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 35%, rgba(0,0,0,0.4) 65%, rgba(0,0,0,0.8) 100%), url(${bg})`}
 			bgSize='cover'
 			h='100vh' w='100%'
 			pos='absolute'

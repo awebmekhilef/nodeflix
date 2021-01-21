@@ -11,7 +11,10 @@ const Header = () => {
 	const location = useLocation()
 
 	return (
-		<HStack h={70} p={8} bgColor={location.pathname === '/' ? 'transparent': 'gray.900'}
+		<HStack h={70} p={8}
+			bgColor={location.pathname === '/' ? 'transparent' : 'white'}
+			boxShadow={location.pathname === '/' ? 'none' : 'base'}
+			color={location.pathname === '/' ? 'white' : 'black'}
 			justifyContent='space-between'
 		>
 			<Logo />
@@ -24,7 +27,7 @@ const Header = () => {
 						Log out
 					</Button> :
 					<Link to='/login'>
-						<Text fontWeight='bold' color='white'>Log In</Text>
+						<Text fontWeight='bold'>Log In</Text>
 					</Link>
 			}
 		</HStack>

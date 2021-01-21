@@ -7,7 +7,7 @@ const Logo = () => {
 	return (
 		<Box>
 			<Text as={Link} to='/'
-				color='white' fontSize='2xl' fontWeight='extrabold'
+				fontSize='2xl' fontWeight='extrabold'
 			>
 				Nodeflix
       </Text>
