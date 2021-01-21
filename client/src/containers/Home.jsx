@@ -1,14 +1,12 @@
 import React from 'react'
 
-import FormContainer from '../components/Forms/FormContainer'
-
-import { useAuth } from '../contexts/authContext'
+import { AspectRatio } from '@chakra-ui/react'
 
 const Home = () => {
-	const { user } = useAuth()
-
 	return (
-		<FormContainer title={`Welcome, ${user.firstName}`} />
+		<AspectRatio mt={16} mx='auto' maxW={720} ratio={16 / 9}>
+			<video src='/video' controls/>
+		</AspectRatio>
 	)
 }
 
