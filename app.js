@@ -34,6 +34,7 @@ db.on('open', () => console.log('Connected to database'))
 db.on('error', () => console.error('Error connecting to database'))
 
 // --------------- ROUTES ---------------
+app.use('/admin', require('./routes/admin.route'))
 app.use('/auth', require('./routes/auth.route'))
 app.use('/video', require('./routes/video.route'))
 
