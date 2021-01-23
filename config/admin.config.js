@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const Movie = require('../models/Movie')
 
 const passwordFeature = require('@admin-bro/passwords')
 const bcrypt = require('bcrypt')
@@ -18,7 +19,7 @@ module.exports = {
 			},
 			hash: (password) => bcrypt.hash(password, 10)
 		})]
-	}],
+	}, Movie],
 	branding: {
 		companyName: 'Nodeflix Dashboard',
 		softwareBrothers: false

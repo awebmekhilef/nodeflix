@@ -1,9 +1,20 @@
+require('dotenv').config()
+
 const express = require('express')
 const mongoose = require('mongoose')
 const passport = require('passport')
 const config = require('./config')
+const firebase = require('firebase-admin')
 
 const app = express()
+
+// --------------- FIREBASE ---------------
+firebase.initializeApp({
+	credential: firebase.credential.cert(
+		JSON.parse(Buffer.from(config.googleConfigBase64, 'base64').toString('ascii'))
+	),
+	storageBucket: config.bucketName
+})
 
 // --------------- SESSION ---------------
 app.use(require('express-session')({
