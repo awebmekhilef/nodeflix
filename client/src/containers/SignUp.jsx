@@ -48,7 +48,7 @@ const SignUp = () => {
 		<FormContainer title='Create an account'>
 			<Formik
 				initialValues={{
-					firstName: 'John', lastName: '',
+					firstName: 'John', lastName: 'Doe',
 					email: 'john@doe.com', password: 'password'
 				}}
 				validationSchema={validationSchema}

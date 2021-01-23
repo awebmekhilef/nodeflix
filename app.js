@@ -26,7 +26,8 @@ app.use(passport.session())
 mongoose.connect(config.dbUrl, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
-	useCreateIndex: true
+	useCreateIndex: true,
+	useFindAndModify: false
 })
 
 const db = mongoose.connection

@@ -11,6 +11,7 @@
   "dependencies": {
     "@admin-bro/express": "^3.1.0",
     "@admin-bro/mongoose": "^1.1.0",
+    "@admin-bro/passwords": "^1.0.3",
     "admin-bro": "^3.3.1",
     "bcrypt": "^5.0.0",
     "express": "^4.17.1",
