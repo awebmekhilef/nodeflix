@@ -37,6 +37,14 @@
   dependencies:
     aws-sdk "^2.728.0"
 
+"@admin-bro/upload@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@admin-bro/upload/-/upload-1.2.0.tgz#a65bfa56dc524e4c843c49fe779690938306d5aa"
+  integrity sha512-+lZbjdMPW43fVXYI2CZ/IP9UpWfhMllOQVTe4+MTiFy1TPT7fIaVREZijxvLFtcF61+zLkBk1DmNlyFRIeuvVg==
+  optionalDependencies:
+    "@google-cloud/storage" "^5.3.0"
+    aws-sdk "^2.728.0"
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.12.11", "@babel/code-frame@^7.8.3":
   version "7.12.11"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.12.11.tgz#f4ad435aa263db935b8f10f2c552d23fb716a63f"

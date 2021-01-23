@@ -10,9 +10,6 @@ const app = express()
 
 // --------------- FIREBASE ---------------
 firebase.initializeApp({
-	credential: firebase.credential.cert(
-		JSON.parse(Buffer.from(config.googleConfigBase64, 'base64').toString('ascii'))
-	),
 	storageBucket: config.bucketName
 })
 

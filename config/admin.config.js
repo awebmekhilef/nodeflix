@@ -1,8 +1,10 @@
+const passwordFeature = require('@admin-bro/passwords')
+const uploadFeature = require('@admin-bro/upload')
+const bcrypt = require('bcrypt')
+
 const User = require('../models/User')
 const Movie = require('../models/Movie')
-
-const passwordFeature = require('@admin-bro/passwords')
-const bcrypt = require('bcrypt')
+const config = require('./')
 
 module.exports = {
 	resources: [{
@@ -19,7 +21,26 @@ module.exports = {
 			},
 			hash: (password) => bcrypt.hash(password, 10)
 		})]
-	}, Movie],
+	}, {
+		resource: Movie,
+		options: {
+			listProperties: ['title', 'description'],
+			showProperties: ['_id', 'title', 'description', 'coverImageUrl'],
+			editProperties: ['title', 'description', 'cover']
+		},
+		features: [uploadFeature({
+			provider: {
+				gcp: {
+					bucket: config.bucketName,
+					expires: 0
+				}
+			},
+			properties: {
+				file: 'cover',
+				key: 'coverImageUrl'
+			}
+		})]
+	}],
 	branding: {
 		companyName: 'Nodeflix Dashboard',
 		softwareBrothers: false

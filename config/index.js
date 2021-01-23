@@ -3,8 +3,7 @@ const config = {
 	port: process.env.PORT || 5000,
 	env: process.env.NODE_ENV || 'development',
 	sessionSecret: process.env.SESSION_SECRET || 'secret',
-	googleConfigBase64: process.env.GOOGLE_CONFIG_BASE64,
-	bucketName: process.env.BUCKET_NAME
+	bucketName: process.env.BUCKET_NAME || 'nodeflix.appspot.com'
 }
 
 module.exports = config;

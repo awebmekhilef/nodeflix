@@ -10,6 +10,9 @@ const movieSchema = new mongoose.Schema({
 	description: {
 		type: String,
 		trim: true
+	},
+	coverImageUrl: {
+		type: String
 	}
 })
 
