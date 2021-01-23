@@ -42,6 +42,9 @@ module.exports = {
 				filePath: 'coverFilePath',
 				filesToDelete: 'coverFilesToDelete',
 			},
+			validation: {
+				mimeTypes: ['image/jpeg', 'image/png'],
+			},
 			uploadPath: (record, filename)=>`${record.id()}/cover${path.extname(filename)}`
 		}),
 		uploadFeature({
@@ -56,6 +59,9 @@ module.exports = {
 				file: 'video',
 				filePath: 'videoFilePath',
 				filesToDelete: 'videoFilesToDelete',
+			},
+			validation: {
+				mimeTypes: ['video/mp4'],
 			},
 			uploadPath: (record, filename)=>`${record.id()}/video${path.extname(filename)}`
 		})]
