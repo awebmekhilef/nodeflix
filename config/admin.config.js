@@ -1,6 +1,7 @@
 const passwordFeature = require('@admin-bro/passwords')
 const uploadFeature = require('@admin-bro/upload')
 const bcrypt = require('bcrypt')
+const path = require('path')
 
 const User = require('../models/User')
 const Movie = require('../models/Movie')
@@ -25,8 +26,8 @@ module.exports = {
 		resource: Movie,
 		options: {
 			listProperties: ['title', 'description'],
-			showProperties: ['_id', 'title', 'description', 'coverImageUrl'],
-			editProperties: ['title', 'description', 'cover']
+			showProperties: ['_id', 'title', 'description', 'coverImageUrl', 'videoFileUrl'],
+			editProperties: ['title', 'description', 'cover', 'video']
 		},
 		features: [uploadFeature({
 			provider: {
@@ -36,9 +37,27 @@ module.exports = {
 				}
 			},
 			properties: {
+				key: 'coverImageUrl',
 				file: 'cover',
-				key: 'coverImageUrl'
-			}
+				filePath: 'coverFilePath',
+				filesToDelete: 'coverFilesToDelete',
+			},
+			uploadPath: (record, filename)=>`${record.id()}/cover${path.extname(filename)}`
+		}),
+		uploadFeature({
+			provider: {
+				gcp: {
+					bucket: config.bucketName,
+					expires: 0
+				}
+			},
+			properties: {
+				key: 'videoFileUrl',
+				file: 'video',
+				filePath: 'videoFilePath',
+				filesToDelete: 'videoFilesToDelete',
+			},
+			uploadPath: (record, filename)=>`${record.id()}/video${path.extname(filename)}`
 		})]
 	}],
 	branding: {

@@ -13,6 +13,9 @@ const movieSchema = new mongoose.Schema({
 	},
 	coverImageUrl: {
 		type: String
+	},
+	videoFileUrl: {
+		type: String
 	}
 })
 
