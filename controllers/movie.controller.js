@@ -19,8 +19,7 @@ const streamVideo = (req, res) => {
 			'Accept-Ranges': 'bytes',
 		})
 
-		const videoStream = fs.createReadStream(videoPath, { start, end })
-		videoStream.pipe(res)
+		fs.createReadStream(videoPath, { start, end }).pipe(res)
 	}
 	else {
 		// If no range given send whole video
@@ -29,8 +28,7 @@ const streamVideo = (req, res) => {
 			'Content-Length': videoSize
 		})
 
-		const videoStream = fs.createReadStream(videoPath)
-		videoStream.pipe(res)
+		fs.createReadStream(videoPath).pipe(res)
 	}
 }
 
