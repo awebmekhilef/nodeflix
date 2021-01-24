@@ -12,7 +12,7 @@ const AuthRoute = ({ children, ...rest }) => {
 			render={() =>
 				user ? (
 					<Redirect
-						to='/home'
+						to='/'
 					/>
 				) : (
 						children

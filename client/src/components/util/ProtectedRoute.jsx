@@ -14,7 +14,7 @@ const AuthRoute = ({ children, ...rest }) => {
 					children
 				) : (
 						<Redirect
-							to='/'
+							to='/welcome'
 						/>
 					)
 			}

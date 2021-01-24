@@ -12,9 +12,9 @@ const Header = () => {
 
 	return (
 		<HStack h={70} p={8}
-			bgColor={location.pathname === '/' ? 'transparent' : 'white'}
-			boxShadow={location.pathname === '/' ? 'none' : 'base'}
-			color={location.pathname === '/' ? 'white' : 'black'}
+			bgColor={location.pathname === '/welcome' ? 'transparent' : 'white'}
+			boxShadow={location.pathname === '/welcome' ? 'none' : 'base'}
+			color={location.pathname === '/welcome' ? 'white' : 'black'}
 			justifyContent='space-between'
 		>
 			<Logo />

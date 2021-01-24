@@ -5,8 +5,12 @@ import Landing from './containers/Landing'
 import SignUp from './containers/SignUp'
 import LogIn from './containers/LogIn'
 import Home from './containers/Home'
+import WatchMovie from './containers/WatchMovie'
 
-import { BrowserRouter, Switch } from 'react-router-dom'
+import {
+	BrowserRouter, Switch, Redirect,
+	Route
+} from 'react-router-dom'
 import { Spinner, Center } from '@chakra-ui/react'
 
 import AuthRoute from './components/util/AuthRoute'
@@ -23,21 +27,29 @@ function App() {
 		<BrowserRouter>
 			<Header />
 			<Switch>
-				<AuthRoute exact path='/'>
-					<Landing />
-				</AuthRoute>
-
-				<ProtectedRoute path='/home'>
+				<ProtectedRoute exact path='/'>
 					<Home />
 				</ProtectedRoute>
 
-				<AuthRoute path='/login'>
+				<ProtectedRoute exact path='/movie/:id'>
+					<WatchMovie />
+				</ProtectedRoute>
+
+				<AuthRoute exact path='/welcome'>
+					<Landing />
+				</AuthRoute>
+
+				<AuthRoute exact path='/login'>
 					<LogIn />
 				</AuthRoute>
 
-				<AuthRoute path='/signup'>
+				<AuthRoute exact path='/signup'>
 					<SignUp />
 				</AuthRoute>
+
+				<Route path='*'>
+					<Redirect to='/' />
+				</Route>
 			</Switch>
 		</BrowserRouter>
 }
