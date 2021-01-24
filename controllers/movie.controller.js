@@ -1,6 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 
+const Movie = require('../models/Movie')
+
 const streamVideo = (req, res) => {
 	const range = req.headers.range
 	const videoPath = path.join(__dirname, '../assets/video.mp4')
@@ -32,6 +34,16 @@ const streamVideo = (req, res) => {
 	}
 }
 
+const getAll = async (req, res) => {
+	try {
+		const movies = await Movie.find({})
+		res.send({ movies })
+	} catch (err) {
+		res.sendStatus(500)
+	}
+}
+
 module.exports = {
-	streamVideo
+	streamVideo,
+	getAll
 }
