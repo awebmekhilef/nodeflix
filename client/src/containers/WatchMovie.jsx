@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 
-import {
-	Heading, Text, Box
-} from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
+import MovieBreadcrumb from '../components/Movie/MovieBreadcrumb'
+import VideoPlayer from '../components/Movie/VideoPlayer'
+import MovieInfo from '../components/Movie/MovieInfo'
 
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
@@ -24,12 +25,10 @@ const WatchMovie = () => {
 	}, [id])
 
 	return movie !== null ?
-		<Box m={[2, 4, 6]}>
-			<video src={`/movie/${movie._id}/stream`} type='video/mp4' crossOrigin
-				height={640} width={360}
-				controls autoPlay muted />
-			<Heading size='md'>{movie.title}</Heading>
-			<Text>{movie.description}</Text>
+		<Box mt={6} mx='auto' maxW={960}>
+			<MovieBreadcrumb title={movie.title} />
+			<VideoPlayer id={movie._id} />
+			<MovieInfo movie={movie} />
 		</Box> :
 		null
 }

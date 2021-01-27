@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
 
-import {
-	AspectRatio, SimpleGrid, Image
-} from '@chakra-ui/react'
+import { SimpleGrid, Heading, Box } from '@chakra-ui/react'
+import MovieTile from '../components/Movie/MovieTile'
 
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 
 const Home = () => {
 	const [movies, setMovies] = useState([])
@@ -22,17 +20,16 @@ const Home = () => {
 	}, [])
 
 	return movies.length !== 0 ?
-		<SimpleGrid m={[2, 4, 6]} columns={[2, 4, 6]} spacing={3}>
-			{
-				movies.map((m) => (
-					<Link to={`/movie/${m._id}`} key={m._id}>
-						<AspectRatio ratio={0.699}>
-							<Image src={`https://storage.googleapis.com/nodeflix.appspot.com/${m.coverImageUrl}`} />
-						</AspectRatio>
-					</Link>
-				))
-			}
-		</SimpleGrid> :
+		<Box mt={8} mx={[3, 4, 6]}>
+			<Heading size='lg' mb={3}>Trending today</Heading>
+			<SimpleGrid columns={[2, 4, 6]} spacing={5}>
+				{
+					movies.map((m) => (
+						<MovieTile key={m._id} id={m._id} cover={m.coverImageUrl} />
+					))
+				}
+			</SimpleGrid>
+		</Box> :
 		null
 }
 
