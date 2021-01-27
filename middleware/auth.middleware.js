@@ -1,8 +1,9 @@
 const checkAuth = (req, res, next) => {
-	if (req.isAuthenticated())
+	if (req.isAuthenticated()) {
 		next()
-	else
+	} else {
 		res.status(401).end()
+	}
 }
 
 module.exports = {

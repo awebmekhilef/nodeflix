@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import {
-	Heading, Image,	Text, Box
+	Heading, Text, Box
 } from '@chakra-ui/react'
 
 import { useParams } from 'react-router-dom'
@@ -21,11 +21,13 @@ const WatchMovie = () => {
 		}
 
 		getMovie()
-	}, [])
+	}, [id])
 
 	return movie !== null ?
 		<Box m={[2, 4, 6]}>
-			<Image maxW={250} src={`https://storage.googleapis.com/nodeflix.appspot.com/${movie.coverImageUrl}`} />
+			<video src={`/movie/${movie._id}/stream`} type='video/mp4' crossOrigin
+				height={640} width={360}
+				controls autoPlay muted />
 			<Heading size='md'>{movie.title}</Heading>
 			<Text>{movie.description}</Text>
 		</Box> :
