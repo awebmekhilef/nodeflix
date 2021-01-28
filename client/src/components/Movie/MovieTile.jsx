@@ -8,7 +8,6 @@ import {
 } from '@chakra-ui/react'
 import ButtonLink from '../util/ButtonLink'
 
-
 import { Link } from 'react-router-dom'
 
 const MovieTile = ({ movie }) => {

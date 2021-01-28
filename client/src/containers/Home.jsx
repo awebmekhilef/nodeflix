@@ -22,7 +22,7 @@ const Home = () => {
 	return movies.length !== 0 ?
 		<Box mt={8} mx={[3, 4, 6]}>
 			<Heading size='lg' mb={3}>Trending today</Heading>
-			<SimpleGrid columns={[2, 4, 6]} spacing={5}>
+			<SimpleGrid columns={[2, 4, 5, 6]} spacing={5}>
 				{
 					movies.map((m) => (
 						<MovieTile key={m._id} movie={m} />
