@@ -6,7 +6,7 @@ const VideoPlayer = ({ id }) => {
 	return (
 		<AspectRatio ratio={16 / 9}>
 			<video src={`/movie/${id}/stream`} type='video/mp4'
-				crossOrigin controls />
+				controls />
 		</AspectRatio>
 	)
 }

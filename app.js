@@ -5,11 +5,8 @@ const mongoose = require('mongoose')
 const passport = require('passport')
 const config = require('./config')
 const firebase = require('firebase-admin')
-const cors = require('cors')
 
 const app = express()
-
-// --------------- EXPRESS SETUP ---------------
 
 // --------------- FIREBASE ---------------
 firebase.initializeApp({
