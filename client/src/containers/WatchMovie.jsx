@@ -25,7 +25,7 @@ const WatchMovie = () => {
 	}, [id])
 
 	return movie !== null ?
-		<Box mt={6} mx='auto' maxW={960}>
+		<Box px={3} mt={6} mx='auto' maxW={960}>
 			<MovieBreadcrumb title={movie.title} />
 			<VideoPlayer id={movie._id} />
 			<MovieInfo movie={movie} />

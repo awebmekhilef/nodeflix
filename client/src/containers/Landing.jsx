@@ -21,14 +21,14 @@ const Landing = () => {
 				<Text mt={5} textAlign='center' fontSize='2xl'>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, explicabo.
 				</Text>
-					<ButtonLink
-						to='/signup'
-						colorScheme='blue'
-						size='lg'
-						mt={5}
-						w='full'
-					>
-						Get Started!
+				<ButtonLink
+					to='/signup'
+					colorScheme='red'
+					size='lg'
+					mt={5}
+					w='full'
+				>
+					Get Started!
 				</ButtonLink>
 			</Box>
 		</Center>

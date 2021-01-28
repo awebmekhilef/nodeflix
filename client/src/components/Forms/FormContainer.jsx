@@ -4,15 +4,16 @@ import { Box, Heading, Center } from '@chakra-ui/react'
 
 const FormContainer = ({ children, title }) => {
 	return (
-		<Box
-			bgColor='white'
-			mt={16} mx='auto' p={8}
-			maxWidth={500} borderWidth={1} borderRadius={8} boxShadow='lg'>
-			<Center>
-				<Heading>{title}</Heading>
-			</Center>
-			
-			{children}
+		<Box mt={16} mx='auto' maxWidth={510}>
+			<Box
+				bgColor='white' p={[3, 8]} mx={3}
+				borderWidth={1} borderRadius={7} boxShadow='lg'>
+				<Center>
+					<Heading>{title}</Heading>
+				</Center>
+
+				{children}
+			</Box>
 		</Box>
 	)
 }
