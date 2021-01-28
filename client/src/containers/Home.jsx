@@ -25,7 +25,7 @@ const Home = () => {
 			<SimpleGrid columns={[2, 4, 6]} spacing={5}>
 				{
 					movies.map((m) => (
-						<MovieTile key={m._id} id={m._id} cover={m.coverImageUrl} />
+						<MovieTile key={m._id} movie={m} />
 					))
 				}
 			</SimpleGrid>

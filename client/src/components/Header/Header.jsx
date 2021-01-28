@@ -11,7 +11,7 @@ const Header = () => {
 	const location = useLocation()
 
 	return (
-		<HStack h={70} p={8}
+		<HStack h={70} py={8} px={[3, 8]}
 			bgColor={location.pathname === '/welcome' ? 'transparent' : 'white'}
 			boxShadow={location.pathname === '/welcome' ? 'none' : 'base'}
 			color={location.pathname === '/welcome' ? 'white' : 'black'}
