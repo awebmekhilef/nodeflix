@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 
+const Rating = require('./Rating')
+
 const movieSchema = new mongoose.Schema({
 	title: {
 		type: String,
@@ -16,6 +18,23 @@ const movieSchema = new mongoose.Schema({
 	},
 	videoFileUrl: {
 		type: String
+	},
+	rateCount: {
+		type: Number,
+		default: 0
+	},
+	rateValue: {
+		type: Number,
+		default: 0
+	}
+})
+
+movieSchema.pre('findOneAndRemove', async function (next) {
+	try {
+		await Rating.deleteMany({ movieId: this.getQuery()._id })
+		next()
+	} catch (err) {
+		next(err)
 	}
 })
 

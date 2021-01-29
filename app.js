@@ -8,6 +8,10 @@ const firebase = require('firebase-admin')
 
 const app = express()
 
+// --------------- EXPRESS SETUP ---------------
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
+
 // --------------- FIREBASE ---------------
 firebase.initializeApp({
 	storageBucket: config.bucketName

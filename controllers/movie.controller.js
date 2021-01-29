@@ -1,6 +1,7 @@
 const firebase = require('firebase-admin')
 
 const Movie = require('../models/Movie')
+const Rating = require('../models/Rating')
 
 const get = async (req, res) => {
 	try {
@@ -20,7 +21,63 @@ const getAll = async (req, res) => {
 	}
 }
 
-// FIXME: Could not proxy request HPE_INVALID_CONSTANT
+const rateMovie = async (req, res) => {
+	try {
+		const ratedBefore = await Rating.find({
+			userId: req.user.id,
+			movieId: req.params.id
+		})
+
+		// Has rated before, so edit rating
+		if (ratedBefore.length !== 0) {
+			const rating = ratedBefore[0]
+
+			const oldRating = rating.rating
+			rating.rating = req.body.rating
+			await rating.save()
+
+			const movie = await Movie.findById(req.params.id)
+
+			if (!movie) {
+				res.sendStatus(400)
+				return
+			}
+
+			movie.rateValue -= oldRating
+			movie.rateValue += req.body.rating
+
+			await movie.save()
+			res.sendStatus(200)
+		} else {
+			const rating = new Rating({
+				userId: req.user.id,
+				movieId: req.params.id,
+				rating: req.body.rating
+			})
+
+			const movie = await Movie.findById(req.params.id)
+
+			if (!movie) {
+				res.sendStatus(400)
+				return
+			}
+
+			await Movie.findByIdAndUpdate(req.params.id, {
+				$inc: {
+					'rateCount': 1,
+					'rateValue': req.body.rating
+				}
+			})
+
+			await rating.save()
+			res.sendStatus(201)
+		}
+	} catch (err) {
+		console.log(err)
+		res.sendStatus(500)
+	}
+}
+
 const streamMovie = async (req, res) => {
 	const range = req.headers.range
 	const bucket = firebase.storage().bucket()
@@ -59,5 +116,6 @@ const streamMovie = async (req, res) => {
 module.exports = {
 	get,
 	getAll,
+	rateMovie,
 	streamMovie
 }
