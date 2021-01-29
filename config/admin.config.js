@@ -26,7 +26,7 @@ module.exports = {
 		resource: Movie,
 		options: {
 			listProperties: ['title', 'description'],
-			showProperties: ['_id', 'title', 'description', 'coverImageUrl', 'videoFileUrl'],
+			showProperties: ['_id', 'title', 'description', 'coverImageUrl', 'videoFileUrl', 'rateCount','rateValue'],
 			editProperties: ['title', 'description', 'cover', 'video']
 		},
 		features: [uploadFeature({

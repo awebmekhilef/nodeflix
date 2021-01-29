@@ -28,7 +28,7 @@ const Landing = () => {
 					mt={5}
 					w='full'
 				>
-					Get Started!
+					GET STARTED
 				</ButtonLink>
 			</Box>
 		</Center>

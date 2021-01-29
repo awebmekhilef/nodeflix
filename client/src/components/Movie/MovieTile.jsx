@@ -6,11 +6,21 @@ import {
 	PopoverContent, PopoverArrow, PopoverHeader,
 	Button, Badge, Text
 } from '@chakra-ui/react'
+import { FaPlay } from 'react-icons/fa'
 import ButtonLink from '../util/ButtonLink'
 
 import { Link } from 'react-router-dom'
 
+
 const MovieTile = ({ movie }) => {
+	const getRating = () => {
+		const rating = Math.round((movie.rateValue / movie.rateCount) * 2) / 2
+
+		if (rating % 1 === 0)
+			return `${rating}.0`
+		
+		return rating
+	}
 	return (
 		<Popover trigger='hover' placement='auto'>
 			<PopoverTrigger>
@@ -26,7 +36,13 @@ const MovieTile = ({ movie }) => {
 				<PopoverHeader pt={4} border={0}>
 					<Text fontWeight='bold'>
 						{movie.title}
-						<Badge ml={2} mb={1} colorScheme='yellow'>★ 4.5</Badge>
+						{
+							movie.rateCount !== 0 ?
+								<Badge ml={2} mb={1} colorScheme='yellow'>
+									★ {getRating()}
+								</Badge> :
+								null
+						}
 					</Text>
 				</PopoverHeader>
 				<PopoverBody>
@@ -36,6 +52,7 @@ const MovieTile = ({ movie }) => {
 				</PopoverBody>
 				<PopoverFooter>
 					<ButtonLink
+						leftIcon={<FaPlay />}
 						to={`/movie/${movie._id}`} w='full'
 						colorScheme='blue' size='sm'
 					>

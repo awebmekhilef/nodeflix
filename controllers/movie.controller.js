@@ -78,6 +78,20 @@ const rateMovie = async (req, res) => {
 	}
 }
 
+const getMovieRating = async (req, res) => {
+	try {
+		const rating = await Rating.findOne({
+			userId: req.user.id,
+			movieId: req.params.id
+		})
+
+		res.json(rating)
+	} catch (err) {
+		console.log(err)
+		res.sendStatus(500)
+	}
+}
+
 const streamMovie = async (req, res) => {
 	const range = req.headers.range
 	const bucket = firebase.storage().bucket()
@@ -117,5 +131,6 @@ module.exports = {
 	get,
 	getAll,
 	rateMovie,
+	getMovieRating,
 	streamMovie
 }
